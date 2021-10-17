@@ -3,9 +3,9 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "radio": "*",
         "Tinybit": "github:lzty634158/tiny-bit#2addb562403d439fafc8cfe9c3bc8ff627160b5b",
-        "microphone": "*"
+        "microphone": "*",
+        "bluetooth": "*"
     },
     "files": [
         "main.blocks",
