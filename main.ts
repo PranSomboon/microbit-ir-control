@@ -1,3 +1,10 @@
+function FollowMode () {
+    if (Tinybit.Ultrasonic_Car() < 15) {
+        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 70)
+    } else {
+        Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
+    }
+}
 Mbit_IR.onPressEvent(RemoteButton.Power, function () {
     Tinybit.RGB_Car_Big(Tinybit.enColor.OFF)
 })
@@ -17,96 +24,7 @@ Mbit_IR.onPressEvent(RemoteButton.Right, function () {
 Mbit_IR.onPressEvent(RemoteButton.NUM9, function () {
     Tinybit.RGB_Car_Big(Tinybit.enColor.Yellow)
 })
-Mbit_IR.onPressEvent(RemoteButton.NUM0, function () {
-    Tinybit.RGB_Car_Big(Tinybit.enColor.Green)
-})
-Mbit_IR.onPressEvent(RemoteButton.Up, function () {
-    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 80)
-    basic.pause(100)
-    Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
-})
-Mbit_IR.onPressEvent(RemoteButton.NUM7, function () {
-    music.playTone(494, music.beat(BeatFraction.Whole))
-})
-Mbit_IR.onPressEvent(RemoteButton.Minus, function () {
-    Tinybit.RGB_Car_Big(Tinybit.enColor.White)
-})
-Mbit_IR.onPressEvent(RemoteButton.Light, function () {
-    Tinybit.RGB_Car_Big(Tinybit.enColor.Red)
-})
-Mbit_IR.onPressEvent(RemoteButton.Left, function () {
-    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Left, 80)
-    basic.pause(100)
-    Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
-})
-Mbit_IR.onPressEvent(RemoteButton.Down, function () {
-    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Back, 80)
-    basic.pause(100)
-    Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
-})
-Mbit_IR.onPressEvent(RemoteButton.TLeft, function () {
-    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_SpinLeft, 80)
-    basic.pause(100)
-    Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
-})
-Mbit_IR.onPressEvent(RemoteButton.NUM3, function () {
-    music.playTone(330, music.beat(BeatFraction.Whole))
-})
-Mbit_IR.onPressEvent(RemoteButton.NUM5, function () {
-    music.playTone(392, music.beat(BeatFraction.Whole))
-})
-Mbit_IR.onPressEvent(RemoteButton.NUM2, function () {
-    music.playTone(294, music.beat(BeatFraction.Whole))
-})
-Mbit_IR.onPressEvent(RemoteButton.BEEP, function () {
-    music.ringTone(988)
-    basic.pause(400)
-    music.rest(music.beat(BeatFraction.Sixteenth))
-})
-Mbit_IR.onPressEvent(RemoteButton.NUM1, function () {
-    music.playTone(262, music.beat(BeatFraction.Whole))
-})
-Mbit_IR.onPressEvent(RemoteButton.NUM6, function () {
-    music.playTone(440, music.beat(BeatFraction.Whole))
-})
-Mbit_IR.onPressEvent(RemoteButton.Plus, function () {
-    Tinybit.RGB_Car_Big(Tinybit.enColor.Blue)
-})
-Mbit_IR.onPressEvent(RemoteButton.NUM4, function () {
-    music.playTone(349, music.beat(BeatFraction.Whole))
-})
-Mbit_IR.init(Pins.P8)
-basic.forever(function () {
-    basic.showIcon(IconNames.Heart)
-})
-basic.forever(function () {
-    if (Tinybit.Ultrasonic_Car() < 20) {
-        Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
-        Tinybit.CarCtrl(Tinybit.CarState.Car_Back)
-    } else if (Tinybit.Ultrasonic_Car() < 25) {
-        Tinybit.CarCtrl(Tinybit.CarState.Car_SpinRight)
-    } else if (Tinybit.Ultrasonic_Car() < 30) {
-        Tinybit.CarCtrl(Tinybit.CarState.Car_Run)
-        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 103)
-    } else if (Tinybit.Ultrasonic_Car() < 50) {
-        Tinybit.CarCtrl(Tinybit.CarState.Car_Run)
-        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 86)
-    } else if (Tinybit.Ultrasonic_Car() < 60) {
-        Tinybit.CarCtrl(Tinybit.CarState.Car_Run)
-        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 125)
-    } else {
-        Tinybit.CarCtrl(Tinybit.CarState.Car_Run)
-        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 255)
-    }
-})
-function FollowMode() {
-    if (Tinybit.Ultrasonic_Car() < 15) {
-        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 70)
-    } else {
-        Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
-    }
-}
-function BreathLED() {
+function BreathLED () {
     Tinybit.RGB_Car_Program().clear()
     for (let k = 0; k <= 255; k++) {
         Tinybit.RGB_Car_Program().setBrightness(k)
@@ -141,6 +59,14 @@ bluetooth.onBluetoothConnected(function () {
         ModeSelect()
     }
 })
+Mbit_IR.onPressEvent(RemoteButton.NUM0, function () {
+    Tinybit.RGB_Car_Big(Tinybit.enColor.Green)
+})
+Mbit_IR.onPressEvent(RemoteButton.Up, function () {
+    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 80)
+    basic.pause(100)
+    Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
+})
 bluetooth.onBluetoothDisconnected(function () {
     basic.showLeds(`
         # # . # #
@@ -152,7 +78,7 @@ bluetooth.onBluetoothDisconnected(function () {
     connected = 0
     Tinybit.RGB_Car_Big(Tinybit.enColor.Blue)
 })
-function domusic() {
+function domusic () {
     if (uartdata == "1") {
         music.ringTone(262)
     } else if (uartdata == "2") {
@@ -183,7 +109,7 @@ function domusic() {
         pins.digitalWritePin(DigitalPin.P0, 0)
     }
 }
-function ModeSelect() {
+function ModeSelect () {
     if (uartdata == "S") {
         basic.showIcon(IconNames.House)
         g_mode = 1
@@ -205,7 +131,10 @@ function ModeSelect() {
         Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
     }
 }
-function AvoidMode() {
+Mbit_IR.onPressEvent(RemoteButton.NUM7, function () {
+    music.playTone(494, music.beat(BeatFraction.Whole))
+})
+function AvoidMode () {
     if (Tinybit.Ultrasonic_Car() < 15) {
         Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_SpinLeft, 90)
         basic.pause(400)
@@ -213,7 +142,10 @@ function AvoidMode() {
         Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 100)
     }
 }
-function HorseLED() {
+Mbit_IR.onPressEvent(RemoteButton.Minus, function () {
+    Tinybit.RGB_Car_Big(Tinybit.enColor.White)
+})
+function HorseLED () {
     Tinybit.RGB_Car_Program().setBrightness(255)
     Tinybit.RGB_Car_Program().setPixelColor(0, neopixel.colors(NeoPixelColors.Red))
     Tinybit.RGB_Car_Program().show()
@@ -229,7 +161,39 @@ function HorseLED() {
     Tinybit.RGB_Car_Program().clear()
     Tinybit.RGB_Car_Program().show()
 }
-function TrackingMode() {
+Mbit_IR.onPressEvent(RemoteButton.Light, function () {
+    Tinybit.RGB_Car_Big(Tinybit.enColor.Red)
+})
+Mbit_IR.onPressEvent(RemoteButton.Left, function () {
+    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Left, 80)
+    basic.pause(100)
+    Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
+})
+Mbit_IR.onPressEvent(RemoteButton.Down, function () {
+    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Back, 80)
+    basic.pause(100)
+    Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
+})
+Mbit_IR.onPressEvent(RemoteButton.TLeft, function () {
+    Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_SpinLeft, 80)
+    basic.pause(100)
+    Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
+})
+Mbit_IR.onPressEvent(RemoteButton.NUM3, function () {
+    music.playTone(330, music.beat(BeatFraction.Whole))
+})
+Mbit_IR.onPressEvent(RemoteButton.NUM5, function () {
+    music.playTone(392, music.beat(BeatFraction.Whole))
+})
+Mbit_IR.onPressEvent(RemoteButton.NUM2, function () {
+    music.playTone(294, music.beat(BeatFraction.Whole))
+})
+Mbit_IR.onPressEvent(RemoteButton.BEEP, function () {
+    music.ringTone(988)
+    basic.pause(400)
+    music.rest(music.beat(BeatFraction.Sixteenth))
+})
+function TrackingMode () {
     if (Tinybit.Line_Sensor(Tinybit.enPos.LeftState, Tinybit.enLineState.White) && Tinybit.Line_Sensor(Tinybit.enPos.RightState, Tinybit.enLineState.White)) {
         Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 150)
     } else if (Tinybit.Line_Sensor(Tinybit.enPos.LeftState, Tinybit.enLineState.White) && Tinybit.Line_Sensor(Tinybit.enPos.RightState, Tinybit.enLineState.Black)) {
@@ -240,7 +204,10 @@ function TrackingMode() {
         Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Stop, 0)
     }
 }
-function WaterLED() {
+Mbit_IR.onPressEvent(RemoteButton.NUM1, function () {
+    music.playTone(262, music.beat(BeatFraction.Whole))
+})
+function WaterLED () {
     Tinybit.RGB_Car_Program().setBrightness(255)
     Tinybit.RGB_Car_Program().setPixelColor(0, neopixel.colors(NeoPixelColors.Green))
     Tinybit.RGB_Car_Program().show()
@@ -256,7 +223,7 @@ function WaterLED() {
     Tinybit.RGB_Car_Program().clear()
     Tinybit.RGB_Car_Program().show()
 }
-function SevenColorLED() {
+function SevenColorLED () {
     if (uartdata == "G") {
         Tinybit.RGB_Car_Big(Tinybit.enColor.Red)
     } else if (uartdata == "H") {
@@ -273,7 +240,10 @@ function SevenColorLED() {
         Tinybit.RGB_Car_Big(Tinybit.enColor.OFF)
     }
 }
-function CarCtrl() {
+Mbit_IR.onPressEvent(RemoteButton.NUM6, function () {
+    music.playTone(440, music.beat(BeatFraction.Whole))
+})
+function CarCtrl () {
     if (uartdata == "A") {
         Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 150)
     } else if (uartdata == "B") {
@@ -290,7 +260,13 @@ function CarCtrl() {
         Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Right, 0)
     }
 }
-function SevenWaterLED() {
+Mbit_IR.onPressEvent(RemoteButton.Plus, function () {
+    Tinybit.RGB_Car_Big(Tinybit.enColor.Blue)
+})
+Mbit_IR.onPressEvent(RemoteButton.NUM4, function () {
+    music.playTone(349, music.beat(BeatFraction.Whole))
+})
+function SevenWaterLED () {
     if (uartdata == "N") {
         g_RGBMode = 1
     } else if (uartdata == "P") {
@@ -311,8 +287,9 @@ let j = 0
 let g_mode = 0
 let g_RGBMode = 0
 let connected = 0
-let item = ""
 let i = 0
+let item = ""
+Mbit_IR.init(Pins.P8)
 Tinybit.RGB_Car_Big(Tinybit.enColor.Red)
 bluetooth.setTransmitPower(7)
 bluetooth.startUartService()
@@ -321,7 +298,7 @@ connected = 0
 g_RGBMode = 0
 g_mode = 0
 basic.forever(function () {
-
+	
 })
 basic.forever(function () {
     if (g_mode == 1) {
@@ -354,4 +331,27 @@ basic.forever(function () {
         g_RGBMode = 0
     }
     basic.pause(10)
+})
+basic.forever(function () {
+    basic.showIcon(IconNames.Heart)
+})
+basic.forever(function () {
+    if (Tinybit.Ultrasonic_Car() < 20) {
+        Tinybit.CarCtrl(Tinybit.CarState.Car_Stop)
+        Tinybit.CarCtrl(Tinybit.CarState.Car_Back)
+    } else if (Tinybit.Ultrasonic_Car() < 25) {
+        Tinybit.CarCtrl(Tinybit.CarState.Car_SpinRight)
+    } else if (Tinybit.Ultrasonic_Car() < 30) {
+        Tinybit.CarCtrl(Tinybit.CarState.Car_Run)
+        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 103)
+    } else if (Tinybit.Ultrasonic_Car() < 50) {
+        Tinybit.CarCtrl(Tinybit.CarState.Car_Run)
+        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 86)
+    } else if (Tinybit.Ultrasonic_Car() < 60) {
+        Tinybit.CarCtrl(Tinybit.CarState.Car_Run)
+        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 125)
+    } else {
+        Tinybit.CarCtrl(Tinybit.CarState.Car_Run)
+        Tinybit.CarCtrlSpeed(Tinybit.CarState.Car_Run, 255)
+    }
 })
